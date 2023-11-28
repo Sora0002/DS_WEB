@@ -10,19 +10,17 @@ exports.getIndex = async (req, res) => {
 };
 
 exports.getPost = async (req, res) => {
-  if(req.params.id != "new"){
   try {
     const post = await Post.findById(req.params.id);
     res.render('post', { post });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-}else{
-  console.log(req.body)
-  res.render('postform');
-}
 };
 
+exports.getNewPostForm = (req, res) => {
+  res.render('postform');
+};
 
 exports.getEditPostForm = async (req, res) => {
   try {

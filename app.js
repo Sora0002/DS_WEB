@@ -3,13 +3,14 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const apiRouter = require('./routes/apiRouter.js');
 const webRouter = require('./routes/webRouter.js');
+const { webAuth, apiAuth } = require('./auth'); // Import the middlewares
 
 const app = express();
 const PORT = 8000;
 
 app.use(bodyParser.json());
 
-const db = "mongodb+srv://Sora_co:2002@DS.rlpuuab.mongodb.net/"
+const db = "mongodb+srv://Sora_co:2002@DS.rlpuuab.mongodb.net/";
 mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     app.listen(3000, () => {
@@ -17,9 +18,8 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
     });
   })
   .catch((err) => console.log(err));
-app.set('view engine', 'pug'); // Set the view engine to Pug
 
-app.use('/api', apiRouter);
+app.use('/api', apiAuth, apiRouter); // Apply apiAuth middleware for the entire API
 app.use('/', webRouter);
 
 app.listen(PORT, () => {
