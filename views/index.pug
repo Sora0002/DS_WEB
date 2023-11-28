@@ -1,0 +1,13 @@
+html
+  head
+    title Blog
+  body
+    h1 Blog
+    each post in posts
+      div
+        h2= post.titre
+        p= post.content
+        a(href=`/posts/${post._id}`) View
+        a(href=`/posts/edit/${post._id}`) Edit
+        form(action=`/api/posts/${post._id}`, method='DELETE')
+          button(type='submit') Delete

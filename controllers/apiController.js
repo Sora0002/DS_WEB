@@ -32,11 +32,8 @@ exports.getPostById = async (req, res) => {
 
 exports.createPost = async (req, res) => {
   try {
-    const post = new Post({
-        titre: req.body.titre,
-        slug: req.body.slug,
-        content: req.body.content,
-    });
+    console.table(req.body)
+    const post = new Post(req.body);
     await post.save();
     res.status(201).json(post);
   } catch (error) {

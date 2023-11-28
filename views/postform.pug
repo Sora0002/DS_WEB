@@ -1,0 +1,13 @@
+html
+    head
+        title New Post
+    body
+        h1 New Post
+        form(action='/api/posts' method='POST')
+            label(for='title') Title:
+            input(type='text' name='titre')
+            label(for='slug') slug:
+            input(type='text' name='slug')
+            label(for='content') Content:
+            textarea(name='content')
+            button(type='submit') Create Post
